@@ -9,7 +9,9 @@ set(CMAKE_DISABLE_IN_SOURCE_BUILD ON)
 set(CMAKE_DISABLE_SOURCE_CHANGES  ON)
 
 # Google Libraries
-set(GTest_DIR C:/opt/TC/local/lib/cmake/GTest)
+if(WIN32)
+  set(GTest_DIR C:/opt/TC/local/lib/cmake/GTest)
+endif()
 find_package(GTest CONFIG REQUIRED) # Gtest/mock
 #-
 #find_package(benchmark CONFIG REQUIRED) # Benchmark
@@ -55,6 +57,12 @@ elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   set_target_properties(bdblib PROPERTIES IMPORTED_LOCATION ${bdb_lib}/libdb181d.lib)
   add_library(bdbstllib STATIC IMPORTED)
   set_target_properties(bdbstllib PROPERTIES IMPORTED_LOCATION ${bdb_lib}/libdb_stl181d.lib)
+
+  # Berkeley DB SQL library
+  set(bdbsql_prj ${CMAKE_SOURCE_DIR}/../BdbSql)
+  add_library(bdbsqllib STATIC IMPORTED)
+  set_target_properties(bdbsqllib PROPERTIES IMPORTED_LOCATION ${bdbsql_prj}/bld_vc/Debug/dbsql.lib)
+
 
   # Needed for combining PDB files into single directory (WinDbg support)
   set(pdb_out ${CMAKE_CURRENT_BINARY_DIR}/pdb)

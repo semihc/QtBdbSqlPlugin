@@ -47,7 +47,7 @@ if(WIN32)
    D:/QT/6.3.2/msvc2019_64/include/QtSql/6.3.2
    D:/QT/6.3.2/msvc2019_64/include/QtSql/6.3.2/QtSql
  )
- target_link_libraries(${libNm} PUBLIC Qt::Core Qt::Sql bdblib ${CMAKE_SOURCE_DIR}/../BdbSql/bld_vc/Debug/dbsql.lib )
+ target_link_libraries(${libNm} PUBLIC Qt::Core Qt::Sql bdblib bdbsqllib)
 else()
  target_include_directories(${libNm}
   PRIVATE
